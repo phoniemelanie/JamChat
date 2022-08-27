@@ -21,21 +21,21 @@ import AddIcon from "@mui/icons-material/Add";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import ShareIcon from "@mui/icons-material/Share";
 
-const FriendCard = ({ avatar, userName, userID }) => {
+const AddFriendCard = (userData) => {
+
   const handleAddUser = (event) => {
-    // console.log(userID);
     event.preventDefault();
 
     // read in the userID instead
-    const userID = "testing1234";
+    // const userID = "testing1234";
 
     //  change this post part to axios
-    fetch(`/addUser/${userID}`, {
-      method: "POST",
-    })
-      .then((res) => res.json())
-      .then((data) => console.log(data))
-      .then((err) => console.log(err));
+    userData.title = "UPDATED";
+
+    // all property
+    // axios.put(apiEndpoint + "/" + userData.id, userData);
+    // partial property
+    axios.patch(apiEndpoint + "/" + user._id, { title: userData.title });
   };
 
   return (
@@ -56,11 +56,12 @@ const FriendCard = ({ avatar, userName, userID }) => {
         <div className="row-display userinfo-display">
           <Avatar sx={{ width: 30, height: 30 }}>
             {/* replace this with the image of avatar stored in db */}
-            <p>D</p>
+            <p>userData.avatar</p>
           </Avatar>
           <Typography className="single-item-flex-middlize" variant="par">
             {/* use the userName instead */}
-            Hello World
+            {/* Hello World */}
+            {userData.name}
           </Typography>
         </div>
 
@@ -93,7 +94,7 @@ const FriendCard = ({ avatar, userName, userID }) => {
   );
 };
 
-export default FriendCard;
+export default AddFriendCard;
 
 // Music player:
 {

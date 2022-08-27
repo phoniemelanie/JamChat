@@ -3,7 +3,8 @@ import logo from "./logo.svg";
 import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-import FriendCard from "./componet/addFriendCard";
+import AddFriendList from "./componet/addFriend/addFriendList";
+import MyFrientList from "./componet/myFriend/myFriendList";
 
 function App() {
   return (
@@ -11,9 +12,12 @@ function App() {
       {/* put nav bar here */}
       <main>
         <Routes>
-          <Route path="/addUser/:userID?" element={<FriendCard />} />
-          <Route path="/addUser" element={<FriendCard />} />
-          <Route path="/" element={<FriendCard />} />
+          <Route path="/friend-list" element={<MyFrientList />} />
+          <Route path="/home" element={<MyFrientList />} />
+          <Route path="/" element={<MyFrientList />} />
+
+          <Route path="/addUser/:userID?" element={<AddFriendList />} />
+          <Route path="/addUser" element={<AddFriendList />} />
         </Routes>
       </main>
     </BrowserRouter>

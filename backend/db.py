@@ -7,7 +7,7 @@ CONNECTION_STRING = config.mongo_url.format(username=config.mongo_username, pass
 
 client = pymongo.MongoClient(CONNECTION_STRING)
 
-# This will either find this database if it already exists, or create one
+# This will either find this database if it alreadyn  exists, or create one
 db = client.get_database('jamchat')
 
 # This will create a collection named 'collection' within the above database

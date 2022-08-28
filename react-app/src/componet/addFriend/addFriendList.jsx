@@ -1,24 +1,31 @@
 import React, { Fragment, useState } from "react";
+import { Link } from "react-router-dom";
 import axios from "axios";
+import { Button } from "@mui/material";
 
 import AddFriendCard from "./addFriendCard";
 import { display } from "@mui/system";
 import { useEffect } from "react";
+import { getListSubheaderUtilityClass } from "@mui/material";
+// import { Button } from "bootstrap";
 
 const AddFriendList = (props) => {
   //TODO: GET data using axsio, and store them into a variable
   // const data = [];
+  console.log("AddFriendList");
 
   const [userData, setState] = useState([]);
 
   useEffect(() => {
     const sendPost = async () => {
-      const { data: userData } = await axios.get("http://appName/getUsers/"); // Backend API: getUsers/
+      const { data: userData } = await axios.post("http://localhost:8000/data"); // Backend API: getUsers/
       return userData;
     };
-
-    const userData = sendPost();
-    setState(userData);
+    const userDataPromise = sendPost();
+    userDataPromise.then((userData) => {
+      console.log("userdata: ", userData);
+      setState(userData);
+    });
   }, []);
 
   // http://appName/getUsers/
@@ -27,17 +34,18 @@ const AddFriendList = (props) => {
 
   return (
     <Fragment>
-      {/* TODO: Map data into AddFriendCard */}
+      <div>
+        {userData.map((user) => {
+          // display the user data in each friend card
+          return <AddFriendCard key={user._id} userData={user} />;
+        })}
+      </div>
 
-      {userData.map((user) => {
-        // display the user data in each friend card
-        <AddFriendCard
-          userData={user}
-          // avatar={user.avatar}
-          // userName={user.name}
-          // userID={user._id}
-        />;
-      })}
+      <div>
+        <Link to="/home">
+          <Button variant="outlined">Back to Main Page</Button>
+        </Link>
+      </div>
     </Fragment>
   );
 };

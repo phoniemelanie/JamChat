@@ -29,7 +29,7 @@ def data():
         live_data["is_live"] = True
         
         if "currently_listening" in friend.keys() and friend["currently_listening"] is not None:
-            live_data["spotify_uri"] = friend["currently_listening"]
+            live_data["spotify_id"] = friend["currently_listening"]
             live.append(live_data)
             
     favs = []
@@ -43,7 +43,7 @@ def data():
                 favs_data["_id"] = friend["_id"]
                 favs_data["username"] = friend["username"]
                 favs_data["profile_picture"] = friend["profile_picture"]
-                favs_data["uri"] = uri
+                favs_data["spotify_id"] = uri
                 favs_data["is_live"] = False
                 favs.append(favs_data)
     data = live + favs

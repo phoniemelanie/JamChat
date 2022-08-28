@@ -29,7 +29,7 @@ def spotify_callback():
 def getAll():
     all_users = db.user_collection.find()
 
-    return json_util.dumps(all_users), {"Access-Control-Allow-Origin": "http://localhost:3000/"}
+    return json_util.dumps(all_users), {"Access-Control-Allow-Origin": "http://localhost:3000"}
 
 if __name__ == '__main__':
     app.run(port=8000)

@@ -1,0 +1,3 @@
+[submodule "backend/MiRemd"]
+	path = backend/MiRemd
+	url = https://github.com/namngduc/MiRemd.git

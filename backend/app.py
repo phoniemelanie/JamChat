@@ -47,8 +47,6 @@ def data():
                 favs_data["is_live"] = False
                 favs.append(favs_data)
     data = live + favs
-    for datum in data:
-        track_id = data["spotify_id"]
         
     return json_util.dumps(data), response_header
 

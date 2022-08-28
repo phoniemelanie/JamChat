@@ -1,11 +1,11 @@
 from flask import Flask, jsonify, request
 import db
-from bson import ObjectId
+from bson import ObjectId, json_util
 
 app = Flask(__name__)
 
-@app.route("/")
-def app():
+@app.route("/data")
+def data():
     input_json = request.get_json(force=True)
     uid = input_json["user_id"]
     user = db.user_collection.find_one({"_id": uid})
@@ -19,20 +19,17 @@ def app():
     return jsonify(data)
 
 # Tomorrow: authentication, spotify tokens, get live tracks from spotify, calculate similarities, deployment
-    
+@app.route("/spotify-callback")
+def spotify_callback():
+    print(request.args)
+    return request.args["code"]
 
 # API to retrieve all users in DB
 @app.route("/getUsers", methods=["POST"])
 def getAll():
     all_users = db.user_collection.find()
-    data = []
 
-    for user in all_users:
-        # Making it into a string avoids this TypeError: Object of type ObjectId is not JSON serializable
-        user['_id'] = str(user['_id']) 
-        data.append(user)
-
-    return jsonify(data)
+    return json_util.dumps(all_users)
 
 if __name__ == '__main__':
     app.run(port=8000)
